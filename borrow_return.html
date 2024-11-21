@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>租借與歸還系統</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-image: url('rain.png'); /* 指定相對路徑 */
+      background-size: cover; /* 確保圖片覆蓋整個背景 */
+      background-position: center -50px; /* 使圖片居中 */
+      background-repeat: no-repeat; /* 防止背景重複 */
+      color: white; /* 設定文字顏色以便在深色背景上可見 */
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.7); /* 半透明背景色 */
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.7); /* 滑鼠懸停效果 */
+      color: black;
+    }
+    #input-container {
+      margin-top: 20px;
+    }
+    input {
+      font-size: 16px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>租借與歸還系統</h1>
+  <div id="button-container">
+    <button onclick="showInput('borrow')">租借</button>
+    <button onclick="showInput('return')">歸還</button>
+  </div>
+  <div id="input-container"></div>
+
+  <script>
+    function showInput(action) {
+      const inputContainer = document.getElementById('input-container');
+      inputContainer.innerHTML = ''; // 清空容器內容
+      const form = document.createElement('form');
+      form.onsubmit = (e) => {
+        e.preventDefault(); // 防止預設的頁面刷新
+        const studentId = document.getElementById('student-id').value;
+        alert(`學號 ${studentId} 已${action === 'borrow' ? '租借' : '歸還'}！`);
+      };
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'student-id';
+      input.placeholder = '請輸入學號';
+      input.required = true;
+
+      const submitButton = document.createElement('button');
+      submitButton.type = 'submit';
+      submitButton.textContent = action === 'borrow' ? '確認租借' : '確認歸還';
+
+      form.appendChild(input);
+      form.appendChild(submitButton);
+      inputContainer.appendChild(form);
+    }
+  </script>
+</body>
+</html>
